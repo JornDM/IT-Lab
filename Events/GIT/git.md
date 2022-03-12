@@ -2,8 +2,6 @@
 
 https://doodle.com/meeting/participate/id/5eVnxxoe
 
-https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/
-
 ## Inleidng
 
 ### Noodzaak versie controle
@@ -30,6 +28,8 @@ Een van de pijlers van git is dat het gedistribueerd is, dwz de repository wordt
 
 ![](./gitWorkflow.png)
 
+(git master is nu git main)
+
 ### Configurations
 
 Om te beginnen pas je best deze zaken aan. Je kan dit ook doen door in een text editor de config file aan te passen.
@@ -44,7 +44,7 @@ git config --global user.email "YOUR@EMAIL.HERE"
 Oke nu kunnen we beginnen met onze eerste repo. Navigeer eerst (met behulp van cd) naar de directory waar we onze repo willen maken. Met het **init** commando maken we een nieuwe lege repository.
 
 ```git
-git init
+git init [REPONAAM]
 ```
 
 ### git add
@@ -70,20 +70,135 @@ Als we zeker zijn dat deze files in hun gestagede vorm mogen toegevoegd worden a
 git commit -m"Een readme file toegevoegd"
 ```
 
-### git remote
-
-### git push
-
 ### Unstagen
 
-### git checkout
+Wat als we per ongeluk een verkeerde file gestaged of gecommit hebben? Dan moeten we gebruik maken van het **reset** commando. Voor unstaging is dit vrij duidelijk.
+
+```git
+git reset
+git reset -- FILENAME
+```
+
+Voor committen ongedaan te maken is het iets onduidelijker.
+
+```git
+git reset HEAD~1
+```
+
+Dit heeft te maken met hoe git aan versiebeheer doet. Kort door de bocht is HEAD de laatste versie in de repo en doet staat ~1 gelijk aan "1 versie terug".
 
 ## Collaborate
 
+Een lokale repository is ook maar een lokale repository. We gaan hieronder bespreken hoe je samen kan werken met behulp van git.
+
+### git remote
+
+Nu gaan we een connectie maken met een online github repo.
+
+```git
+git remote add origin [REMOTE_URL]
+```
+
+### git push
+
+Nu we de connectie hebben gemaakt kunnen we onze lokale veranderingen naar daar 'pushen'. Dit doen we met het **push** commando.
+
+```git
+git push -u origin main
+```
+
+Wat doet optie -u?  -u zorgt er voor dat je zorgenloos kunt 'pullen' van de gespecifieerde branch op de remote (meer over branching volgt nog!). Maar wat is 'pullen'?
+
 ### git clone
+
+Wat als we van een al bestaande remote repo een lokale kopie willen maken? Dit heet het *clonen* van een repo en hiervoor gebruiken het toepasselijk genoemde **clone** commando.
+
+```git
+git clone [REMOTE_URL]
+```
 
 ### git fetch & git merge
 
+Wat als we de recentste versie van de remote repository willen ophalen? Eerst halen we de files/code van de remote repo naar de lokale repo. Dit doen we met het **fetch** commando.
+
+```git
+git fetch
+```
+
+Daarna willen we de files waarschijnlijk in onze working directory brengen om er  mee te werken. Hiervoor gebruiken we het **merge** commando.
+
+```git
+git merge
+```
+
+#### merge conflict
+
+Git zal proberen om de code in de files zo goed mogelijk te updaten met de nieuwe versie die is opgehaald uit de repo. Maar dit lukt niet altijd. Als het git niet lukt om zelf de code te mergen krijg je een merge conflict. Hier worden beide stukken code (de lokale en de remote) samen geplaatst en is het de bedoeling dat de gebruiker manueel zelf het probleem op lost.
+
+```bash
+<<<<<<< HEAD
+this is some content to mess with
+content to append
+=======
+totally different content to merge later
+>>>>>>> new_branch_to_merge_later
+```
+
+### git pull
+
+Telkens fetch plus merge doen kan vermoeiend zijn. Daarom bestaat het **pull** commando waarbij beiden worden uitgevoerd. Merk op dat er hier dus ook merge conflicts kunnen ontstaan.
+
+```git
+git pull
+```
+
+### git checkout
+
+Wat als je een specifieke commit wil ophalen uit de lokale of remote repo? Een commando dat dit voor ons kan doen is het **checkout** commando.
+
+```git
+git checkout [COMMIT_HASH]
+```
+
+Merk op dat dit commando veel complexere zaken aankan dan slechts commits ophalen.
+
 ### .gitignore
 
+Wat als we bepaalde files of directories niet aan onze repo willen toevoegen? Een goed voorbeeld hiervan in java is het classpath dat sowieso toch voor iedere gebruiker individueel moet geconfigureerd worden. Deze files (of directories of ...)  voegen we toe aan onze *.gitignore* file. Men kan hier heel specifiek in gaan.
+
+```vim
+## Commentaar
+/.classpath
+/bin/
+*.pdf
+```
+
 ## Branching
+
+We hebben het al eens vermeld maar tot nu toe is het nog heel stil geweest rond een heel belangrijke feature van git: *branching*.
+
+### Branching?
+
+Stel je zit met een bug in je code. Je geraakt er niet aan uit en je wil hulp vragen aan iemand in je team. Push je dan de code gewoon zomaar naar de remote? Als het een app-breaking bug is maak je het daarmee het probleem van iedereen. Dan zullen je andere teamleden pas verder kunnen werken aan waar ze mee bezig waren tot de bug gefixed is. Anderzijds zou het ook veel te veel werk zijn om voor elke bug waar je met andere teamleden aan wil werken een aparte repo te maken. Of nog erger, je begint terug met files zoals serviceworker.js, serviceworkerBugFix.js, serviceworkerFinal.js, ...
+
+Gelukkig heeft git voor onder andere dit soort problemen een handige feature. Bekijk eens onze versiecontrole vanuit een visueel standpunt. Eigenlijk zou je commits op een lange tijdsas  kunnen beschouwen als allemaal punten die elkaar opvolgen in een lange lijn. Deze punten kan je knopen noemen en de lijn een tak. Wat is de Engelse vertaling voor een tak? Dat is juist! *branch* Git laat toe meerdere zo'n takken/*branches* te maken en biedt vele opties en commando's aan om er mee te werken. De hoofdtak (die we tot nu toe ook altijd gebruikt hebben) heet de *main branch* (vroeger master). Laten we ons bug probleem opnieuw beschouwen. Git laat je toe een nieuwe branch te maken die afsplitst van de main en waarin jij en je teamlid de bug kunnen fixen terwijl de rest voortdoet op de main branch. Jullie kunnen samen commits maken naar deze branch en de rest ook naar de main.
+
+![](./branch.png)
+
+ En hier komt het leuke gedeelte, wanneer jullie de bug hebben opgelost kan je jullie branch terug **mergen** met de main branch! 
+
+![](./mergeBranch.png)
+
+### Een nieuwe branch maken
+
+
+
+### Wisselen tussen branches
+
+
+
+### Branches mergen
+
+
+
+### Branches verwijderen
