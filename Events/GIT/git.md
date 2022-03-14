@@ -8,17 +8,17 @@ https://doodle.com/meeting/participate/id/5eVnxxoe
 
 We hebben het allemaal al vast meegemaakt in het middelbaar wanneer we in groep aan een taak moesten werken.
 Nadat we allemaal de bestanden naar elkaar doorgestuurd hebben eindigen we met 3 verschillende versies van de taak met namen zoals taak.docx, taak1.docx, taakFINAAL.docx.
-In de IT wereld werken hele departementen aan één codebase en dan is zo absoluut geen manier van werken. Er is nood aan een systeem dat de verschillende versies van de documenten en code bij houd. Een *version control system*.
+In de IT wereld werken hele departementen aan één codebase en dan is dat absoluut geen manier van werken. Er is nood aan een systeem dat de verschillende versies van de documenten en code bij houd. Een *version control system*.
 
 ### GIT?
 
-Een technologie die ons hier bij kan helpen is *git*. Git is bedacht en ontworpen in 2005 door Linus Torvalds (de maker van Linux) en is dus gemaakt voor de Unix command interface. Git houdt alle code en files bij in een repo*sitory*.Ondertussen bestaan er ook grafische interfaces/implementaties zoals GitHub , Gitkraken, GitLab etc.
+Een technologie die ons hier bij kan helpen is *git*. Git is bedacht en ontworpen in 2005 door Linus Torvalds (de maker van Linux) en is dus gemaakt voor de Unix command interface. Git houdt alle code en files bij in een repo*sitory*. Ondertussen bestaan er ook grafische interfaces/implementaties zoals GitHub , Gitkraken, GitLab etc.
 
 - GitHub is een cloud hosting service voor het hosten van je repositories maar ze bieden ook een gui aan voor lokaal te werken met git en nog veel meer.
 
 - Gitkraken gui voor git
 
-- Zoals GitHub maar met een licht andere focus
+- GitLab zoals GitHub maar met een licht andere focus
 
 Een van de pijlers van git is dat het gedistribueerd is, dwz de repository wordt niet bijgehouden op één centrale server maar iedereen die aan het project werkt heeft (een versie van)  de repository lokaal.
 
@@ -41,7 +41,7 @@ git config --global user.email "YOUR@EMAIL.HERE"
 
 ### Create a repo
 
-Oke nu kunnen we beginnen met onze eerste repo. Navigeer eerst (met behulp van cd) naar de directory waar we onze repo willen maken. Met het **init** commando maken we een nieuwe lege repository.
+Nu kunnen we beginnen met onze eerste repo. We navigeren eerst (met behulp van cd) naar de directory waar we onze repo willen maken. Met het **init** commando maken we een nieuwe lege repository.
 
 ```git
 git init [REPONAAM]
@@ -191,14 +191,39 @@ Gelukkig heeft git voor onder andere dit soort problemen een handige feature. Be
 
 ### Een nieuwe branch maken
 
+Een nieuwe branch kunnen we maken met het **branch** commando.
 
+```git
+git branch newBranch
+```
 
 ### Wisselen tussen branches
 
+We kunnen wisselen naar de nieuwe branch met het eerder geziene **checkout**. Wat bedoelen we onder wisselen? Vanaf dat we wisselen naar deze branch zullen al onze nieuwe commits naar deze branch gepushed worden.
 
+```git
+git checkout newBranch
+```
+
+Dit kan korter! Opnieuw gebruik makend van **checkout** kunnen we een nieuwe branch maken en er meteen naar wisselen.
+
+```git
+git checkout -b newBranch2
+```
 
 ### Branches mergen
 
+Wanneer we een branch willen samenvoegen in een andere branch maken we opnieuw gebruik van **checkout** en **merge**. We moeten eerst naar de brach wisselen waarin we willen mergen en daarna voeren we de merge uit.
 
+```git
+git checkout main
+git merge newBranch
+```
 
 ### Branches verwijderen
+
+Nu we de branches gemerged hebben kunnen we eventueel de gemergde branch verwijderen (bijvoorbeeld als het om een bugfix branch gaat). Dit doen we met de optie -d van het **branch** commando.
+
+```git
+git branch -d newBranch
+```
