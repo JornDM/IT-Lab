@@ -227,3 +227,7 @@ Nu we de branches gemerged hebben kunnen we eventueel de gemergde branch verwijd
 ```git
 git branch -d newBranch
 ```
+
+## Nuttige links
+
+[Explain Git with D3](https://onlywei.github.io/explain-git-with-d3/)
