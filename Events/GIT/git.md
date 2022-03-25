@@ -2,7 +2,7 @@
 
 https://doodle.com/meeting/participate/id/5eVnxxoe
 
-## Inleidng
+## Inleiding
 
 ### Noodzaak versie controle
 
